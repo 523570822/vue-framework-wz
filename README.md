@@ -72,7 +72,7 @@
 
 [《一步步带你做vue后台管理框架》第三课：登录功能](http://www.cnblogs.com/herozhou/p/7469667.html)
 
-## Run 开发 
+## Run 开发
 ```bash
     # 克隆项目
     git clone https://github.com/herozhou/vue-framework-wz.git
@@ -100,7 +100,7 @@
 ```
     # 如需使用脚手架在npm install 之后执行
     npm link
-   
+
     # 随后即可使用wz脚手架
     wz remove -p Tinymce  //卸载Tinymce插件
     wz remove -p Mockjs  //卸载Mock.js插件
@@ -135,8 +135,8 @@
 
 ## FileTree 目录结构
 ```shell
-├── bin                       // node 命令行构建工具 
-├── build                      // 构建相关  
+├── bin                       // node 命令行构建工具
+├── build                      // 构建相关
 ├── config                     // 配置相关
 ├── src                        // 源代码
 │   ├── api                    // 所有请求
@@ -186,9 +186,9 @@
 ## Thanks 感激
 感谢以下的项目,排名不分先后
 
-* [iView](http://mouapp.com/) 
+* [iView](http://mouapp.com/)
 * [jquery](http://jquery.com)
 
 ## License
 
-MIT
+增加验证码功能
