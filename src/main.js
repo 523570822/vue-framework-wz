@@ -7,8 +7,9 @@ import './mock'; // 该项目所有请求使用mockjs模拟
 import './login.js';
 import './ui.js';
 import global_ from './components/Global'//引用文件
+import common from './utils/common'//引用文件
 Vue.config.productionTip = false;
-
+Vue.prototype.common = common;
 Vue.config.devtools = true
 Vue.prototype.GLOBAL = global_//挂载到Vue实例上面
 var vm = new Vue({

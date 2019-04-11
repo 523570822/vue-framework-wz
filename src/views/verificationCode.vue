@@ -39,17 +39,31 @@
             {
               title: '使用者名称',
               key: 'name'
+            },
+
+            {
+              title: '分类',
+              key: 'level'
             }, {
               title: '验证码',
-              key: 'description'
+              key: 'verificationCode'
             },
             {
               title: '开始时间',
-              key: 'description'
+              key: 'beginDate',
+              render: (ce, params) => {
+                let beginDate123 = params.row.beginDate;
+                let beginDate = this.common.formatDate(new Date(beginDate123), "yyyy-M-d hh:mm:ss");
+                return ce('div', beginDate)
+              }
             },
+            /*,    {
+                   title: '结束时间',
+                   key: 'endDate'
+                 }*/
             {
               title: '是否启用',
-              key: 'description'
+              key: 'switch'
             },
             {
               title: '说明',
@@ -82,9 +96,8 @@
                           console.info(formItemN);
                           delete formItemN['_index'];
                           delete formItemN['_rowKey'];
+                          delete formItemN['endDate'];
                           //   delete formItemN['defaultList'];
-                          this.$refs.addFrom.$refs.uploadFile.imageList = [];
-                          this.$refs.addFrom.$refs.uploadFile.$refs.upload.clearFiles();
                           Object.assign(this.addFrom.formItem, formItemN);
                           this.addFrom.modal12 = true;
                           this.loading = true;
@@ -125,9 +138,11 @@
               id: '',
               name: '',
               switch: 0,
-              url: '',
+              beginDate: '',
               weights: 0,
-              description: ''
+              verificationCode: 0,
+              description: '',
+              level: 1
             },
           }
 
@@ -173,7 +188,7 @@
         refresh() {
           this.loading = true;
           //
-          this.$store.dispatch('GetCarouserAll').then((response) => {
+          this.$store.dispatch('GetVericationAll').then((response) => {
             console.info("成功回调刷新表数据");
             //   console.info(response.data);
             this.data1 = response.data;
@@ -182,8 +197,8 @@
 
             //  this.$router.push({ path: '/' });
           }).catch(err => {
-            // console.info(err)
-            this.$message.error(err);
+            console.info(err)
+            //   this.$message.error(err);
             this.loading = false;
           });
         }

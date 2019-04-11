@@ -59,6 +59,25 @@ export function addCarousel(formItem) {
     });
   }
 }
+export function addVerication(formItem) {
+  const data = {
+    formItem: formItem
+  };
+  console.info(formItem.formItem.id);
+  if(formItem.formItem.id == '' || formItem.formItem.id == null || formItem.formItem.id == 0 || formItem.formItem.id == '0') {
+    return fetch({
+      url: '/api/user/addVerication',
+      method: 'post',
+      data
+    });
+  }else {
+    return fetch({
+      url: '/api/user/updateVerication',
+      method: 'post',
+      data
+    });
+  }
+}
 export function addImage(formItem) {
   const data = {
     formItem: formItem
@@ -246,6 +265,15 @@ export function getCarouserAll() {
   };
   return fetch({
     url: '/api/user/getCarouserAll',
+    method: 'post',
+    data
+  });
+}
+export function getVericationAll() {
+  const data = {
+  };
+  return fetch({
+    url: '/api/user/getVericationAll',
     method: 'post',
     data
   });

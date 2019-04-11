@@ -61,6 +61,18 @@ const carouser = {
         });
       });
     },
+    GetVericationAll({ commit }) {
+      return new Promise((resolve, reject) => {
+        carouserApi.getVericationAll().then(response => {
+          //    console.info(response);
+          resolve(response);
+        }).catch(error => {
+          console.info(error)
+          //   alert(error);
+          // reject(error);
+        });
+      });
+    },
     GetImageAll({ commit }) {
       return new Promise((resolve, reject) => {
         carouserApi.getImageAll().then(response => {
@@ -210,6 +222,28 @@ const carouser = {
     DeleteCategory({ commit }, id) {
       return new Promise((resolve, reject) => {
         carouserApi.deleteCategory(id).then(response => {
+          resolve(response);
+        }).catch(error => {
+          console.info(error)
+          //  alert(error);
+          reject(error);
+        });
+      });
+    },
+    AddVerication({ commit }, formItem) {
+      return new Promise((resolve, reject) => {
+        carouserApi.addVerication(formItem).then(response => {
+          resolve(response);
+        }).catch(error => {
+          console.info(error)
+          //  alert(error);
+          reject(error);
+        });
+      });
+    },
+    GetCategoryById({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        carouserApi.getCategoryById(data).then(response => {
           resolve(response);
         }).catch(error => {
           console.info(error)
