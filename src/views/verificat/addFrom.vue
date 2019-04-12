@@ -23,7 +23,7 @@
                 </Select>
             </FormItem>
            <FormItem label="是否开启">
-                <i-switch    v-model="todo.formItem.switch" true-value=1 false-value=0 size="large">
+                <i-switch    v-model="todo.formItem.switchs" true-value=1 false-value=0 size="large">
                     <span slot="open">On</span>
                     <span slot="close">Off</span>
                 </i-switch>
@@ -99,12 +99,18 @@
               this.$store.dispatch('AddVerication', data).then((response) => {
                 console.info("成功回调");
                 if(response.data.code == 0) {
-                  console.info(response.data);
-                  this.$Message.error('提交失败');
-                  this.todo.modal12 = true;
-                  // this.data1 = response;
-                  this.$emit('refreshFrom');
-                  this.loading = false
+                  if(response.data.errno == 1062) {
+                    this.$Message.error('验证码已经存在');
+                    this.todo.modal12 = true;
+                    // this.data1 = response;
+                    this.$emit('refreshFrom');
+                    this.loading = false
+                  }else{
+                    this.$Message.error('提交失败');
+                    this.todo.modal12 = true;
+                    this.$emit('refreshFrom');
+                    this.loading = false
+                  }
 
                   //  this.$router.push({ path: '/' });
                 }else{

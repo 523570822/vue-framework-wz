@@ -141,9 +141,9 @@ const carouser = {
         });
       });
     },
-    GetCategoryById({ commit }, data) {
+    GetVericationBylevel({ commit }, data) {
       return new Promise((resolve, reject) => {
-        carouserApi.getCategoryById(data).then(response => {
+        carouserApi.getVericationBylevel(data).then(response => {
           resolve(response);
         }).catch(error => {
           console.info(error)

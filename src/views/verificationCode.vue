@@ -6,8 +6,22 @@
            <Button  @click="add"  type="info"> 增加</Button>
            <Button  @click="refresh" icon="md-refresh"   shape="circle"> </Button>
            <!-- <img :src="'../static/img/logo.png'" >-->
+            <Select v-model="parent_id"  style="width:200px" @on-change="freshById">
+                <Option :value="0" :key="0">全部</Option>
+                <Option :value="1" :key="1">一级邀请码</Option>
+                <Option :value="2" :key="2">二级邀请码</Option>
+                <Option :value="3" :key="3">三级邀请码</Option>
+                <Option :value="4" :key="4">四级邀请码</Option>
+                <Option :value="5" :key="5">五级邀请码</Option>
+                <Option :value="6" :key="6">六级邀请码</Option>
+                <Option :value="7" :key="7">七级邀请码</Option>
+                <Option :value="8" :key="8">八级邀请码</Option>
+                <Option :value="9" :key="9">九级邀请码</Option>
+                <Option :value="10" :key="10">十级邀请码</Option>
+            </Select>
         </div><br>
         <add-from v-bind:todo="addFrom" @refreshFrom="refresh"   ref="addFrom"  ></add-from>
+
         <Table :columns="columns1" :data="data1"></Table>
         <Modal
                 v-model="modal1"
@@ -30,6 +44,7 @@
         return {
           modal1: false,
           delete: '',
+          parent_id: 0,
           columns1: [
             {
               title: '序号',
@@ -62,8 +77,9 @@
                    key: 'endDate'
                  }*/
             {
-              title: '是否启用',
-              key: 'switch'
+              title: '是否启用(1已启用,0已关闭)',
+              key: 'switchs',
+
             },
             {
               title: '说明',
@@ -134,10 +150,11 @@
             modal12: false,
             titleN: '',
             id: '',
+
             formItem: {
               id: '',
               name: '',
-              switch: 0,
+              switchs: 0,
               beginDate: '',
               weights: 0,
               verificationCode: 0,
@@ -201,7 +218,33 @@
             //   this.$message.error(err);
             this.loading = false;
           });
+        },
+        freshById() {
+          console.info("ddd");
+
+          let data = {
+            level: this.parent_id
+          };
+          console.info(data);
+          if(data.level == 0) {
+            this.refresh();
+            return;
+          }
+          this.$store.dispatch('GetVericationBylevel', data).then((response) => {
+            console.info("成功回调");
+            console.info(response.data);
+            this.data1 = response.data;
+            //this.$Message.success('登录成功');
+            this.loading = false;
+
+            //  this.$router.push({ path: '/' });
+          }).catch(err => {
+            console.info(err)
+            this.$message.error(err);
+            this.loading = false;
+          });
         }
+
       },
       components: {
         'add-from': addFrom

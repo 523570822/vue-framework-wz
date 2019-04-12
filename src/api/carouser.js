@@ -143,6 +143,17 @@ export function getGoodsByCategoryId(data) {
     params: data1
   });
 }
+export function getVericationBylevel(data) {
+  const data1 = {
+    level: data.level
+  };
+  console.info(data1);
+  return fetch({
+    url: '/api/user/getVericationBylevel',
+    method: 'post',
+    data: data1
+  });
+}
 export function getGoodsById(id) {
   const data = {
     id: id
