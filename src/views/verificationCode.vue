@@ -4,7 +4,7 @@
     <div class="animated fadeIn">
         <div >
            <Button  @click="add"  type="info"> 增加</Button>
-           <Button  @click="refresh" icon="md-refresh"   shape="circle"> </Button>
+           <Button  @click="refresh1" icon="md-refresh"   shape="circle"> </Button>
            <!-- <img :src="'../static/img/logo.png'" >-->
             <Select v-model="parent_id"  style="width:200px" @on-change="freshById">
                 <Option :value="0" :key="0">全部</Option>
@@ -18,6 +18,7 @@
                 <Option :value="8" :key="8">八级邀请码</Option>
                 <Option :value="9" :key="9">九级邀请码</Option>
                 <Option :value="10" :key="10">十级邀请码</Option>
+
             </Select>
         </div><br>
         <add-from v-bind:todo="addFrom" @refreshFrom="refresh"   ref="addFrom"  ></add-from>
@@ -44,7 +45,7 @@
         return {
           modal1: false,
           delete: '',
-          parent_id: 0,
+          parent_id: 1,
           columns1: [
             {
               title: '序号',
@@ -62,6 +63,16 @@
             }, {
               title: '验证码',
               key: 'verificationCode'
+            }, {
+              title: '使用时间(分钟)',
+              key: 'num',
+              render: (ce, params) => {
+                let num = params.row.num;
+                if(num == null) {
+                  num = 0;
+                }
+                return ce('div', num)
+              }
             },
             {
               title: '开始时间',
@@ -167,7 +178,7 @@
       },
       created: function() {
         console.group('------created创建完毕状态------');
-        this.refresh();
+        this.refresh1();
       },
       methods: {
         ok () {
@@ -201,6 +212,24 @@
 
           this.addFrom.titleN = "增加";
           this.addFrom.modal12 = true;
+        },
+        refresh1() {
+          let data = {
+            level: 1
+          };
+          this.$store.dispatch('GetVericationBylevel', data).then((response) => {
+            console.info("成功回调");
+            console.info(response.data);
+            this.data1 = response.data;
+            //this.$Message.success('登录成功');
+            this.loading = false;
+
+            //  this.$router.push({ path: '/' });
+          }).catch(err => {
+            console.info(err)
+            this.$message.error(err);
+            this.loading = false;
+          });
         },
         refresh() {
           this.loading = true;
