@@ -208,6 +208,17 @@ const carouser = {
         });
       });
     },
+    DeleteVerifiaction({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        carouserApi.deleteVerifiaction(id).then(response => {
+          resolve(response);
+        }).catch(error => {
+          console.info(error)
+          //  alert(error);
+          reject(error);
+        });
+      });
+    },
     DeleteGoods({ commit }, id) {
       return new Promise((resolve, reject) => {
         carouserApi.deleteGoods(id).then(response => {

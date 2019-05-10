@@ -194,7 +194,7 @@
         remove (params) {
           console.info(params.index);
 
-          this.$store.dispatch('DeleteCarouser', params.row.id).then((response) => {
+          this.$store.dispatch('DeleteVerifiaction', params.row.id).then((response) => {
             console.info(response);
             console.info("成功回调刷新表数据");
             this.loading = false

@@ -238,6 +238,17 @@ export function deleteCarouser(id) {
     data
   });
 }
+export function deleteVerifiaction(id) {
+  const data = {
+    id: id
+  };
+
+  return fetch({
+    url: '/api/user/deleteVerifiaction',
+    method: 'post',
+    data
+  });
+}
 
 export function deleteGoods(id) {
   const data = {
