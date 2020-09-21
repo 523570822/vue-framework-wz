@@ -126,7 +126,8 @@
                             }
                             let ss = spUrl.split(",");
                             if(ss.length > 0 && spUrl.length > 5) {
-                                uuu = this.GLOBAL.imageUrl + ss[0];
+                               // uuu = this.GLOBAL.imageUrl + ss[0];
+								 uuu =  ss[0];
                             }else{
                                 return;
                             }
